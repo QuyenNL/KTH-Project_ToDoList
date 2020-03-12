@@ -1,4 +1,6 @@
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -19,8 +21,30 @@ public class ToDo {
      */
 
     public ToDo() {
-        Task userInput = new Task("Get home", new Date(), new Time(12312L), true);
+    }
+
+    public void addTask() {
+        String todo;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Add a title to the task");
+        todo = scanner.nextLine();
+
+        Date date = new Date();
+        System.out.println("Add deadline to the task (\"dd/MM/yyyy\")");
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(scanner.next());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //Boolean done;
+        //System.out.println("This task has been done");
+        //todo = scanner.next();
+
+
+        Task userInput = new Task(todo, date, true);
         taskList.add(userInput);
+
     }
 
     public static void main(String[] args) {
@@ -45,6 +69,7 @@ public class ToDo {
         }
         else if(userChoice == 2) {
             System.out.println("Please fill in the task");
+            toDo.addTask();
 
         }
         else {
